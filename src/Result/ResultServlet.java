@@ -6,6 +6,7 @@ package Result;
  */
 
 import java.io.IOException;
+import ClassR.ClassR;
 import subject.Subject;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -83,6 +84,12 @@ public class ResultServlet extends HttpServlet {
 			}else{
 				s=subject;
 			}
+        	String NameClass = request.getParameter("NameClass");
+        	if(NameClass == null){
+        		NameClass="";
+        	}else{
+        		s=NameClass;
+        	}
 			String n="";
 			String min = request.getParameter("Min");
 			String max = request.getParameter("Max");
@@ -98,8 +105,10 @@ public class ResultServlet extends HttpServlet {
 				 Min = Integer.parseInt(max);
 				 Max = Integer.parseInt(min);
 			}
+			request.setAttribute("DataClass", ClassR.List(n));
 			request.setAttribute("DataSubject", Subject.List(n));
 			request.setAttribute("DataTable", Result.List(s,Min,Max));
+			
 			request.setAttribute("web_title", "List Result");
 			request.setAttribute("web_content", "Result/result.jsp");
 			request.getRequestDispatcher("/WEB-INF/jsp/layout.jsp").forward(request, response);

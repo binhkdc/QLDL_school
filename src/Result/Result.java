@@ -61,16 +61,8 @@ public class Result
     public static List<HashMap<String, String>> List(String keywork,int Min,int Max) 
             throws SQLException, ClassNotFoundException
     {
-    	int min;
-    	int max;
-    	if(Min>Max){
-    		min=Max;
-    		max=Min;
-    	}else{
-    		min=Min;
-    		max=Max; 
-    	}
-    	String sql = "SELECT result.ResultId, result.Point, student.Name, subject.NameSubject,class.NameClass FROM result LEFT join student ON result.StudentId = student.StudentId LEFT join class on student.ClassId=class.ClassId  LEFT JOIN subject on result.SubjectId=subject.SubjectId WHERE result.Point LIKE '%"+keywork+"%'  and result.Point >= "+Min+" and result.Point <= "+Max+" or student.Name LIKE '%"+keywork+"%'  and result.Point >= "+Min+" and result.Point <= "+Max+" or subject.NameSubject LIKE '%"+keywork+"%' and result.Point >= "+min+" and result.Point <= "+max+"";  
+
+    	String sql = "SELECT result.ResultId, result.Point, student.Name, subject.NameSubject,class.NameClass FROM result LEFT join student ON result.StudentId = student.StudentId LEFT join class on student.ClassId=class.ClassId  LEFT JOIN subject on result.SubjectId=subject.SubjectId WHERE result.Point LIKE '%"+keywork+"%'  and result.Point >= "+Min+" and result.Point <= "+Max+" or student.Name LIKE '%"+keywork+"%'  and result.Point >= "+Min+" and result.Point <= "+Max+" or subject.NameSubject LIKE '%"+keywork+"%' and result.Point >= "+Min+" and result.Point <= "+Max+" or class.NameClass LIKE '%"+keywork+"%' and result.Point >= "+Min+" and result.Point <= "+Max+"";  
         DB.open(); 
         ResultSet rs = DB.q(sql);
         List<HashMap<String,String>> list = new ArrayList<>();
@@ -81,6 +73,7 @@ public class Result
             row.put("Point",       rs.getString("Point")) ;
             row.put("StudentId",      rs.getString("student.Name")) ;
             row.put("SubjectId",   rs.getString("subject.NameSubject")) ;
+            row.put("NameClass",   rs.getString("class.NameClass")) ;
             row.put("Filter",   keywork) ;
                 
             list.add(row);             

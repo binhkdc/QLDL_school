@@ -29,8 +29,9 @@
 							</div>
 							<div class="col-auto">
 								<input type="number" class="form-control" Name="Max" value=""
-									placeholder="to" required /> <input type="hidden"
-									class="form-control" Name="NameSubject" value="${filter}"
+									placeholder="to" required /> 
+									<input type="hidden"
+									class="form-control" Name="NameClass" value="${filter}"
 									placeholder="to" required />
 							</div>
 							<div class="col-auto">
@@ -39,6 +40,32 @@
 						</div>
 
 					</form>
+				</div>
+				<div class="col-auto">
+					<select name="forma" class="form-select"
+						aria-label="Default select example"
+						onchange="location = this.value;">
+
+						<c:choose>
+							<c:when test="${filter == null}">
+								<option value="result" selected>Default</option>
+							</c:when>
+							<c:otherwise>
+								<option value="result">Default</option>
+							</c:otherwise>
+						</c:choose>
+						<c:forEach var="Data" items="${requestScope.DataClass}">
+							<c:set var="Class" value="${Data.NameClass}" />
+							<c:choose>
+								<c:when test="${filter == Class}">
+									<option value="result?NameClass=${Data.NameClass}" selected>${Data.NameClass}</option>
+								</c:when>
+								<c:otherwise>
+									<option value="result?NameClass=${Data.NameClass}">${Data.NameClass}</option>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</select>
 				</div>
 				<div class="col-auto">
 					<select name="forma" class="form-select"
@@ -92,6 +119,7 @@
 						<thead>
 							<tr>
 								<th class="cell">NameStudent</th>
+								<th class="cell">NameClass</th>
 								<th class="cell">NameSubject</th>
 								<th class="cell">Point <a href="#demo"
 									class="fa-solid fa-filter" data-bs-toggle="collapse"></a></th>
@@ -103,6 +131,7 @@
 								<tr>
 
 									<td class="cell">${Data.StudentId}</td>
+									<td class="cell">${Data.NameClass}</td>
 									<td class="cell">${Data.SubjectId}</td>
 									<td class="cell">${Data.Point}</td>
 									<td class="cell"><a class="btn-sm app-btn-secondary"
