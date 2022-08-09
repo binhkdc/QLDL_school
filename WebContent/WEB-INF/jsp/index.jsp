@@ -79,7 +79,7 @@ String jsonMin_score = new Gson().toJson(request.getAttribute("DataMin"));
 								}
 
 						const myChart = new Chart(ctx, {
-							type : 'line',
+							type : 'bar',
 							data : {
 								labels : <%out.print(jsonClass);%>,
 								datasets : [data1,data2,data3]
