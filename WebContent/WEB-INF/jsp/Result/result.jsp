@@ -48,10 +48,10 @@
 
 						<c:choose>
 							<c:when test="${filter == null}">
-								<option value="result" selected>Tên lớp fffffffffffffffff</option>
+								<option value="result" selected>Name Class</option>
 							</c:when>
 							<c:otherwise>
-								<option value="result">Tên lớp fffffffffffffffff</option>
+								<option value="result">Name CLass</option>
 							</c:otherwise>
 						</c:choose>
 						<c:forEach var="Data" items="${requestScope.DataClass}">
@@ -74,10 +74,10 @@
 
 						<c:choose>
 							<c:when test="${filter == null}">
-								<option value="result" selected>Tên Môn Học</option>
+								<option value="result" selected>Name Subject</option>
 							</c:when>
 							<c:otherwise>
-								<option value="result">Tên Môn Học</option>
+								<option value="result">Name Subject</option>
 							</c:otherwise>
 						</c:choose>
 						<c:forEach var="Data" items="${requestScope.DataSubject}">
